@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-
 <project xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -17,6 +15,13 @@
     <prerequisites>
         <maven>${maven.version}</maven>
     </prerequisites>
+    
+    <scm>
+        <connection>scm:git:git://github.com/opentable/otj-version-exposure-maven-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:opentable/otj-version-exposure-maven-plugin.git</developerConnection>
+        <url>http://github.com/opentable/otj-version-exposure-maven-plugin</url>
+        <tag>HEAD</tag>
+    </scm>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
