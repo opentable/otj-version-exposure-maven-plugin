@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.opentable</groupId>
@@ -13,13 +15,28 @@
     <prerequisites>
         <maven>${maven.version}</maven>
     </prerequisites>
-    
+
     <scm>
         <connection>scm:git:git://github.com/opentable/otj-version-exposure-maven-plugin.git</connection>
         <developerConnection>scm:git:git@github.com:opentable/otj-version-exposure-maven-plugin.git</developerConnection>
         <url>http://github.com/opentable/otj-version-exposure-maven-plugin</url>
         <tag>HEAD</tag>
     </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>opentable.snapshot</id>
+            <name>opentable-snapshots</name>
+            <uniqueVersion>true</uniqueVersion>
+            <url>https://artifactory.otenv.com/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>opentable</id>
+            <name>opentable-internal</name>
+            <url>https://artifactory.otenv.com/internal</url>
+            <uniqueVersion>false</uniqueVersion>
+        </repository>
+    </distributionManagement>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
