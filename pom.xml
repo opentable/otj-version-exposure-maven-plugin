@@ -4,7 +4,6 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.opentable</groupId>
     <artifactId>expose-versions-maven-plugin</artifactId>
     <version>1.4-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
@@ -23,20 +22,11 @@
         <tag>HEAD</tag>
     </scm>
 
-    <distributionManagement>
-        <snapshotRepository>
-            <id>opentable.snapshot</id>
-            <name>opentable-snapshots</name>
-            <uniqueVersion>true</uniqueVersion>
-            <url>https://artifactory.otenv.com/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>opentable</id>
-            <name>opentable-internal</name>
-            <url>https://artifactory.otenv.com/internal</url>
-            <uniqueVersion>false</uniqueVersion>
-        </repository>
-    </distributionManagement>
+    <parent>
+        <groupId>com.opentable</groupId>
+        <artifactId>otj-parent-spring</artifactId>
+        <version>191</version>
+    </parent>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -51,12 +41,24 @@
             <artifactId>maven-plugin-api</artifactId>
             <version>${maven.version}</version>
             <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.annotation</groupId>
+                    <artifactId>jsr250-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-core</artifactId>
             <version>${maven.version}</version>
             <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.inject</groupId>
+                    <artifactId>guice</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>

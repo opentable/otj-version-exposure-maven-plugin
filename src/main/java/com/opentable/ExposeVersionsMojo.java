@@ -1,8 +1,10 @@
 package com.opentable;
 
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 import org.apache.maven.plugin.AbstractMojo;
@@ -84,7 +86,10 @@ public class ExposeVersionsMojo extends AbstractMojo {
             File target = outputDirectory;
 
             if (!target.exists()) {
-                target.mkdirs();
+                boolean created = target.mkdirs();
+                if(!created) {
+                    getLog().warn("Could not create target directory");
+                }
             }
 
             File propertiesFile = new File(target, projectVersionFileName + PROPERTIES_FILE_EXTENSION);
@@ -119,7 +124,7 @@ public class ExposeVersionsMojo extends AbstractMojo {
      */
     private void writeVersionNumberToFile(File propertiesFile, String version) {
         getLog().info("Writing version " + version + " to " + propertiesFile.getPath());
-        try (FileWriter writer = new FileWriter(propertiesFile)) {
+        try (OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(propertiesFile), StandardCharsets.UTF_8);) {
             writer.write("version=" + version + "\n");
         } catch (IOException e) {
             throw new RuntimeMojoExecutionException(
