@@ -74,6 +74,13 @@ public class ExposeVersionsMojo extends AbstractMojo {
     private String frameworkVersionFileName;
 
     /**
+     * Name of the properties file to produce to store the framework version The
+     * .properties suffix will be appended. The default is the artifact ID
+     */
+    @Parameter(property = "skip", defaultValue="false")
+    private boolean skip;
+
+    /**
      * The current Maven project.
      */
     @Parameter(property = "project", required = true, readonly = true)
@@ -81,6 +88,11 @@ public class ExposeVersionsMojo extends AbstractMojo {
 
     @Override
     public void execute() throws MojoExecutionException {
+
+        if(skip) {
+            getLog().info("Skipping execution.");
+            return;
+        }
 
         try {
             File target = outputDirectory;
