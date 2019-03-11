@@ -24,6 +24,7 @@ We determine that a project is a service by checking for the existence of a spec
 | frameworkArtifactId  | The group ID of the framework's Maven Parent POM |
 | frameworkPropertyName  | The group ID of the framework's Maven Parent POM |
 | frameworkVersionFileName  | The group ID of the framework's Maven Parent POM |
+| skip  | Should plugin execution be skipped |
 
 
 Example:
@@ -46,6 +47,7 @@ Example:
                 <frameworkArtifactId>framework</frameworkArtifactId>
                 <frameworkPropertyName>framework.version</frameworkPropertyName>
                 <frameworkVersionFileName>framework-version</frameworkVersionFileName>
+                <skip>false</skip>
             </configuration>
         </plugin>
 ```
