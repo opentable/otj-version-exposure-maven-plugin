@@ -17,7 +17,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>expose-versions-maven-plugin</artifactId>
-    <version>1.6</version>
+    <version>1.7-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
     <name>Expose Versions Maven Plugin</name>
@@ -31,7 +31,7 @@
         <connection>scm:git:git://github.com/opentable/otj-version-exposure-maven-plugin.git</connection>
         <developerConnection>scm:git:git@github.com:opentable/otj-version-exposure-maven-plugin.git</developerConnection>
         <url>http://github.com/opentable/otj-version-exposure-maven-plugin</url>
-        <tag>expose-versions-maven-plugin-1.6</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <parent>
