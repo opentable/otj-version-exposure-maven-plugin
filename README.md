@@ -1,6 +1,6 @@
 # Expose Versions Maven Plugin
 
-The expose versions Maven plugin is designed to help determine the versions of components and expose them, so that they can be accessible to other Maven plugins and to applications at runtime.
+The expose versions Maven plugin is designed to help determine the versions of components and expose them, so that they can be accessible to other Maven plugins and to applications at runtime. Which is cool
 
 We basically have 2 types of projects: services and libraries. All of our projects use a common Maven parent POM. That POM is basically our framework, it manages the versions of all of our components.
 
