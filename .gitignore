@@ -1,0 +1,7 @@
+.idea
+target
+*.iml
+# Ignore .DS_Store files
+.DS_Store
+# Ignore .ci-friendly-pom.xml file
+.ci-friendly-pom.xml

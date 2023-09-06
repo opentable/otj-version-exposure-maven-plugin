@@ -16,6 +16,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>com.opentable</groupId>
     <artifactId>expose-versions-maven-plugin</artifactId>
     <version>1.7-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
@@ -27,6 +28,13 @@
         <maven>${maven.version}</maven>
     </prerequisites>
 
+    <parent>
+        <groupId>org.basepom</groupId>
+        <artifactId>basepom-minimal</artifactId>
+        <version>55</version>
+        <relativePath />
+    </parent>
+
     <scm>
         <connection>scm:git:git://github.com/opentable/otj-version-exposure-maven-plugin.git</connection>
         <developerConnection>scm:git:git@github.com:opentable/otj-version-exposure-maven-plugin.git</developerConnection>
@@ -34,17 +42,16 @@
         <tag>HEAD</tag>
     </scm>
 
-    <parent>
-        <groupId>com.opentable</groupId>
-        <artifactId>otj-parent-spring</artifactId>
-        <version>191</version>
-    </parent>
 
     <properties>
+        <!-- policy jar for license and checkstyle defaults -->
+        <dep.basepom-policy.version>10</dep.basepom-policy.version>
+        <basepom.license.skip-existing>true</basepom.license.skip-existing>
+        <basepom.check.fail-license>${basepom.check.fail-extended}</basepom.check.fail-license>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <maven.version>3.8.1</maven.version>
+        <maven.version>3.8.8</maven.version>
         <basepom.oss.skip-scala-doc>true</basepom.oss.skip-scala-doc>
         <basepom.check.skip-javadoc>false</basepom.check.skip-javadoc>
         <basepom.check.fail-javadoc>false</basepom.check.fail-javadoc>
@@ -130,6 +137,66 @@
                     <artifactId>maven-invoker-plugin</artifactId>
                     <version>3.1.0</version>
                 </plugin>
+                <!-- checks for valid OSS license stuff and headers -->
+                <plugin>
+                    <groupId>com.mycila</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>${dep.plugin.license.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.basepom</groupId>
+                            <artifactId>basepom-policy</artifactId>
+                            <version>${dep.basepom-policy.version}</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <skipExistingHeaders>${basepom.license.skip-existing}</skipExistingHeaders>
+                        <failIfMissing>${basepom.check.fail-license}</failIfMissing>
+                        <header>license/basepom-apache-license-header.txt</header>
+                        <headerDefinitions>
+                            <headerDefinition>license/xml-prefix.xml</headerDefinition>
+                        </headerDefinitions>
+                        <mapping>
+                            <xml>XML_PREFIX</xml>
+                            <java>SLASHSTAR_STYLE</java>
+                            <yaml>SCRIPT_STYLE</yaml>
+                        </mapping>
+                        <strictCheck>true</strictCheck>
+                        <aggregate>true</aggregate>
+                        <useDefaultExcludes>true</useDefaultExcludes>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                        <excludes>
+                            <exclude>.*/**</exclude>
+                            <exclude>**/*.md</exclude>
+                            <exclude>**/*.rst</exclude>
+                            <exclude>**/*.adoc</exclude>
+                            <exclude>**/*.sh</exclude>
+                            <exclude>**/*.txt</exclude>
+                            <exclude>**/*.thrift</exclude>
+                            <exclude>**/*.proto</exclude>
+                            <exclude>**/*.g</exclude>
+                            <exclude>**/*.releaseBackup</exclude>
+                            <exclude>**/*.vm</exclude>
+                            <exclude>**/*.st</exclude>
+                            <exclude>**/*.raw</exclude>
+                            <exclude>**/*.ser</exclude>
+                            <exclude>**/src/license/**</exclude>
+                        </excludes>
+                        <includes>
+                            <include>src/**</include>
+                            <include>**/pom.xml</include>
+                        </includes>
+                    </configuration>
+                </plugin>
+                <!-- sign with gpg -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>${dep.plugin.gpg.version}</version>
+                    <configuration>
+                        <useAgent>true</useAgent>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
@@ -156,5 +223,27 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <id>build-expose-versions-maven-plugin</id>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>opentable.snapshot</id>
+                    <name>opentable-snapshots</name>
+                    <uniqueVersion>true</uniqueVersion>
+                    <url>https://artifactory.otenv.com/snapshots</url>
+                </snapshotRepository>
+                <repository>
+                    <id>sonatype-nexus-staging</id>
+                    <name>Nexus Release Repository</name>
+                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+    </profiles>
 
 </project>
