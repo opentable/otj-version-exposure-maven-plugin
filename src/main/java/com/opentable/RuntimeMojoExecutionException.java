@@ -25,11 +25,11 @@ public class RuntimeMojoExecutionException extends RuntimeException {
     private final MojoExecutionException mojoExecutionException;
 
     public RuntimeMojoExecutionException(MojoExecutionException mojoExecutionException) {
-        this.mojoExecutionException = mojoExecutionException;
+        this.mojoExecutionException = new MojoExecutionException(mojoExecutionException);
     }
 
     public MojoExecutionException getMojoExecutionException() {
-        return mojoExecutionException;
+        return new MojoExecutionException(mojoExecutionException);
     }
 
 }
