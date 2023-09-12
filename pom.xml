@@ -55,7 +55,6 @@
         <basepom.oss.skip-scala-doc>true</basepom.oss.skip-scala-doc>
         <basepom.check.skip-javadoc>false</basepom.check.skip-javadoc>
         <basepom.check.fail-javadoc>false</basepom.check.fail-javadoc>
-        <basepom.release.profiles>basepom.oss-release</basepom.release.profiles>
     </properties>
 
     <dependencies>
@@ -244,14 +243,6 @@
                     <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
                 </repository>
             </distributionManagement>
-        </profile>
-        <!-- Active during OSS release:perform -->
-        <profile>
-            <id>basepom.oss-release</id>
-            <properties>
-                <!-- tests run in the preparation step of the release -->
-                <skipTests>true</skipTests>
-            </properties>
             <build>
                 <plugins>
                     <!-- oss requires a javadoc jar. Build one when releasing. -->
