@@ -46,6 +46,7 @@
     <properties>
         <!-- policy jar for license and checkstyle defaults -->
         <dep.basepom-policy.version>10</dep.basepom-policy.version>
+        <dep.plugin.gpg.version>3.1.0</dep.plugin.gpg.version>
         <basepom.license.skip-existing>true</basepom.license.skip-existing>
         <basepom.check.fail-license>${basepom.check.fail-extended}</basepom.check.fail-license>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
