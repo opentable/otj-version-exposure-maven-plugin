@@ -52,7 +52,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <maven.version>3.8.8</maven.version>
+        <maven.version>3.8.4</maven.version>
         <basepom.oss.skip-scala-doc>true</basepom.oss.skip-scala-doc>
         <basepom.check.skip-javadoc>false</basepom.check.skip-javadoc>
         <basepom.check.fail-javadoc>false</basepom.check.fail-javadoc>
